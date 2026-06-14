@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creative Studio + Lab | Digital Solutions</title>
     
-    <!-- Premium Inter and Space Mono Fonts -->
+    <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -36,7 +36,7 @@
             scroll-behavior: smooth;
         }
 
-        /* Continuous Fluid Background Track mirroring across sections */
+        /* Continuous Fluid Background Track */
         .page-section {
             position: relative;
             width: 100%;
@@ -48,13 +48,12 @@
             background: var(--bg-gradient);
         }
 
-        /* Specific gradient offsets to make continuous slide feel */
         #hero { background: linear-gradient(135deg, #7cb9ff 0%, #1852a6 60%, #030811 100%); }
         #presence { background: linear-gradient(180deg, #030811 0%, #15458c 50%, #030811 100%); }
         #testimonials { background: linear-gradient(180deg, #030811 0%, #11366f 40%, #02060c 100%); }
         #contact { background: linear-gradient(225deg, #02060c 0%, #1954ab 70%, #60a1f0 100%); }
 
-        /* Modern Navigation Overlay */
+        /* Navigation Overlay */
         .fixed-nav {
             position: fixed;
             top: 2rem;
@@ -112,87 +111,263 @@
             padding-left: 0.9rem;
         }
 
-        /* High-Fidelity Music Overlay Page (Canva inspired) */
+        /* PRO MUSIC OVERLAY (Inspired by image_555e0d.png) */
         #music-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(5, 13, 26, 0.95);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            background: #0d0d0d;
+            /* Dark 3D-looking geometric abstract background pattern */
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)),
+                url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
             z-index: 2000;
             display: none;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .pro-player-container {
+            width: 90%;
+            max-width: 950px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            position: relative;
+            z-index: 10;
+            padding: 2rem;
+        }
+
+        /* Left Column: Metadata & Waveform */
+        .player-left {
+            flex: 1;
+            display: flex;
             flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Audio Waveform Graphic imitation */
+        .waveform-container {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            height: 60px;
+            margin-bottom: 2rem;
+        }
+
+        .wave-bar {
+            width: 4px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 2px;
+            height: 20px;
+            transition: height 0.3s ease;
+        }
+        
+        /* Simulating the geometric variation from image_555e0d.png */
+        .wave-bar:nth-child(3n) { height: 45px; }
+        .wave-bar:nth-child(5n) { height: 55px; }
+        .wave-bar:nth-child(2n) { height: 25px; }
+        .wave-bar:nth-child(7n) { height: 15px; }
+
+        /* Dynamic playing animation class toggled via JS */
+        .playing .wave-bar {
+            animation: wave-pulse 1.2s infinite ease-in-out alternate;
+        }
+        .playing .wave-bar:nth-child(3n) { animation-delay: 0.2s; animation-duration: 0.8s; }
+        .playing .wave-bar:nth-child(4n) { animation-delay: 0.4s; animation-duration: 1.4s; }
+        .playing .wave-bar:nth-child(5n) { animation-delay: 0.1s; animation-duration: 1.1s; }
+
+        @keyframes wave-pulse {
+            0% { transform: scaleY(0.3); }
+            100% { transform: scaleY(1.1); }
+        }
+
+        .pro-track-title {
+            font-size: clamp(2.5rem, 4.5vw, 4rem);
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .pro-track-artist {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+            margin-bottom: 3rem;
+        }
+
+        /* Timeline Progress Bar */
+        .pro-timeline-wrapper {
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-bar-bg {
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            position: relative;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        .timeline-bar-progress {
+            width: 0%;
+            height: 100%;
+            background: #ffffff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        .time-counter {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: right;
+            margin-top: 0.5rem;
+        }
+
+        /* Premium Media Deck Buttons */
+        .pro-controls-deck {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .deck-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.6);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            width: 24px;
+            height: 24px;
+            transition: stroke 0.3s, transform 0.2s;
+        }
+
+        .deck-icon:hover {
+            stroke: #ffffff;
+            transform: scale(1.1);
+        }
+
+        .deck-icon.play-pause-btn {
+            width: 50px;
+            height: 50px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            stroke: #0d0d0d;
+            fill: #0d0d0d;
+            padding: 12px;
+        }
+
+        .deck-icon.play-pause-btn:hover {
+            transform: scale(1.05);
+            background: rgba(255,255,255,0.9);
+        }
+
+        /* Right Column: Vinyl Disk */
+        .player-right {
+            position: relative;
+            display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .music-card {
-            width: 90%;
-            max-width: 420px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 2.5rem;
-            border-radius: 30px;
-            text-align: center;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
-            transform: scale(0.9);
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        /* Vinyl Structure matching image_555e0d.png */
+        .vinyl-disk {
+            width: clamp(280px, 35vw, 380px);
+            height: clamp(280px, 35vw, 380px);
+            background: radial-gradient(circle, #111 0%, #222 40%, #050505 60%, #1a1a1a 70%, #000000 100%);
+            border-radius: 50%;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8), inset 0 0 20px rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 2px solid #2a2a2a;
         }
 
-        #music-overlay.active .music-card {
-            transform: scale(1);
+        /* Microgroove reflection lines inside record */
+        .vinyl-disk::before {
+            content: '';
+            position: absolute;
+            width: 90%; height: 90%;
+            border-radius: 50%;
+            border: 1px dashed rgba(255, 255, 255, 0.03);
         }
 
-        .music-card img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            border-radius: 20px;
-            margin-bottom: 2rem;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        /* Center Picture Ring */
+        .vinyl-center-art {
+            width: 52%;
+            height: 52%;
+            border-radius: 50%;
+            background-image: url('https://amrdiab.net/wp-content/uploads/2025/07/NewAlbum2025-AmrDiab.jpg');
+            background-size: cover;
+            background-position: center;
+            border: 5px solid #111;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0,0,0,0.6);
         }
 
-        .music-card h2 {
-            font-family: var(--font-sans);
-            font-weight: 700;
-            font-size: 1.5rem;
-            letter-spacing: -0.5px;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
+        /* Center spindle hole */
+        .vinyl-center-art::after {
+            content: '';
+            position: absolute;
+            width: 12px; height: 12px;
+            background: #0d0d0d;
+            border-radius: 50%;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid #333;
         }
 
-        .music-card .artist-tag {
+        /* Rotation physics setup */
+        .rotating {
+            animation: spin-vinyl 15s linear infinite;
+        }
+
+        @keyframes spin-vinyl {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Native Audio Element Hidden */
+        #audio-player { display: none; }
+
+        /* Close Overlay Button */
+        .close-pro-btn {
+            position: absolute;
+            top: 3rem;
+            left: 3rem;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
             font-family: var(--font-mono);
             font-size: 0.9rem;
-            color: #7cb9ff;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-            letter-spacing: 2px;
-        }
-
-        audio {
-            width: 100%;
-            margin-top: 1rem;
-            border-radius: 30px;
-        }
-
-        .close-overlay-btn {
-            margin-top: 2rem;
             cursor: pointer;
-            color: rgba(255, 255, 255, 0.6);
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            text-transform: uppercase;
             letter-spacing: 2px;
+            text-transform: uppercase;
             transition: color 0.3s;
+            z-index: 100;
         }
 
-        .close-overlay-btn:hover {
-            color: #ffffff;
-        }
+        .close-pro-btn:hover { color: #ffffff; }
 
         /* Abstract Fluid Graphic Accents */
         .fluid-accent {
@@ -215,7 +390,7 @@
             border-radius: 60% 40% 30% 70% / 50% 30% 70% 50%;
         }
 
-        /* Custom Asymmetric Glassmorphism Panels */
+        /* Glassmorphism Panels Layout */
         .glass-panel {
             position: relative;
             z-index: 5;
@@ -235,7 +410,6 @@
             box-shadow: 0 35px 60px -10px rgba(0, 0, 0, 0.6);
         }
 
-        /* Section layout containers */
         .two-col-container {
             width: 100%;
             display: flex;
@@ -274,7 +448,6 @@
             text-transform: uppercase;
         }
 
-        /* Pro Interactive Actions */
         .btn-modern {
             display: inline-flex;
             align-items: center;
@@ -300,7 +473,6 @@
             box-shadow: 0 15px 30px rgba(0, 102, 255, 0.6);
         }
 
-        /* Mock/Media Content Columns */
         .media-column {
             width: 48%;
             display: flex;
@@ -326,7 +498,7 @@
             display: block;
         }
 
-        /* PAGE 2: GROW YOUR PRESENCE LAYOUT */
+        /* PAGE 2: GROW YOUR PRESENCE */
         .presence-grid {
             position: relative;
             width: 100%;
@@ -367,190 +539,77 @@
         }
 
         .shape-left-top {
-            top: -10%;
-            left: 2%;
-            width: 280px;
-            height: 280px;
-            border-radius: 40px;
+            top: -10%; left: 2%; width: 280px; height: 280px; border-radius: 40px;
             background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=500&q=80');
-            background-size: cover;
-            background-position: center;
+            background-size: cover; background-position: center;
         }
 
         .shape-right-bottom {
-            bottom: -15%;
-            right: 4%;
-            width: 320px;
-            height: 380px;
-            border-radius: 60px 60px 4px 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
+            bottom: -15%; right: 4%; width: 320px; height: 380px; border-radius: 60px 60px 4px 60px;
+            display: flex; flex-direction: column; justify-content: flex-end;
             background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80');
-            background-size: cover;
-            background-position: center;
+            background-size: cover; background-position: center;
         }
 
         .abstract-frame-left {
-            position: absolute;
-            bottom: -20%;
-            left: -5%;
-            width: 300px;
-            height: 300px;
-            border-left: 1px solid rgba(255,255,255,0.2);
-            border-top: 1px solid rgba(255,255,255,0.2);
+            position: absolute; bottom: -20%; left: -5%; width: 300px; height: 300px;
+            border-left: 1px solid rgba(255,255,255,0.2); border-top: 1px solid rgba(255,255,255,0.2);
             border-radius: 50px 0 0 0;
         }
 
-        /* PAGE 3: TESTIMONIALS LAYOUT */
+        /* PAGE 3: TESTIMONIALS */
         .testimonials-container {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 4.5rem;
-            z-index: 5;
+            width: 100%; display: flex; flex-direction: column; gap: 4.5rem; z-index: 5;
         }
 
-        .testimonials-container h2 {
-            font-size: clamp(3rem, 5.5vw, 5.5rem);
-            font-weight: 300;
-            letter-spacing: -2px;
-        }
+        .testimonials-container h2 { font-size: clamp(3rem, 5.5vw, 5.5rem); font-weight: 300; letter-spacing: -2px; }
+        
+        .testimonial-columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3.5rem; }
+        
+        .testimonial-card { display: flex; flex-direction: column; justify-content: space-between; gap: 2.5rem; }
 
-        .testimonial-columns {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 3.5rem;
-        }
+        .quote-body { font-family: var(--font-mono); font-size: 1.1rem; line-height: 1.65; color: rgba(255, 255, 255, 0.9); text-align: justify; }
 
-        .testimonial-card {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 2.5rem;
-        }
+        .quote-author { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
 
-        .quote-body {
-            font-family: var(--font-mono);
-            font-size: 1.1rem;
-            line-height: 1.65;
-            color: rgba(255, 255, 255, 0.9);
-            text-align: justify;
-        }
-
-        .quote-author {
-            font-size: 1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            line-height: 1.4;
-        }
-
-        .quote-author span {
-            display: block;
-            font-family: var(--font-mono);
-            font-weight: 400;
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 0.25rem;
-        }
+        .quote-author span { display: block; font-family: var(--font-mono); font-weight: 400; font-size: 0.85rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.25rem; }
 
         .corner-decoration-top {
-            position: absolute;
-            top: 4%;
-            right: 6%;
-            width: 180px;
-            height: 120px;
-            border-top: 1px solid rgba(255,255,255,0.25);
-            border-right: 1px solid rgba(255,255,255,0.25);
+            position: absolute; top: 4%; right: 6%; width: 180px; height: 120px;
+            border-top: 1px solid rgba(255,255,255,0.25); border-right: 1px solid rgba(255,255,255,0.25);
             border-radius: 0 40px 0 0;
         }
 
-        /* PAGE 4: QUESTIONS / CONTACT LAYOUT */
+        /* PAGE 4: CONTACT */
         .contact-panel {
-            width: 48%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border);
-            border-radius: 60px 4px 60px 60px;
-            aspect-ratio: 1 / 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--glass-shadow);
+            width: 48%; background: var(--glass-bg); backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border); border-radius: 60px 4px 60px 60px;
+            aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; box-shadow: var(--glass-shadow);
         }
 
         .grid-graphic-3d {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.2rem;
-            width: 50%;
-            height: 50%;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; width: 50%; height: 50%;
             transform: perspective(600px) rotateX(10deg) rotateY(-10deg);
         }
 
-        .grid-block {
-            background: linear-gradient(135deg, #a1caff 0%, #3b82f6 100%);
-            border-radius: 14px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            transition: transform 0.3s;
-        }
+        .grid-block { background: linear-gradient(135deg, #a1caff 0%, #3b82f6 100%); border-radius: 14px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); transition: transform 0.3s; }
+        .grid-block:nth-child(even) { background: linear-gradient(135deg, #34d399 0%, #059669 100%); }
+        .grid-block:hover { transform: translateZ(20px); }
 
-        .grid-block:nth-child(even) {
-            background: linear-gradient(135deg, #34d399 0%, #059669 100%);
-        }
+        .contact-info-column { width: 45%; display: flex; flex-direction: column; justify-content: center; }
+        .contact-info-column h2 { font-size: clamp(3.5rem, 6.5vw, 6.5rem); font-weight: 400; letter-spacing: -2px; margin-bottom: 4rem; }
+        .contact-details-box { font-family: var(--font-mono); font-size: 1.15rem; line-height: 1.8; color: rgba(255, 255, 255, 0.9); }
+        .contact-details-box a { color: #7cb9ff; text-decoration: none; font-weight: 700; display: inline-block; margin-top: 2rem; border-bottom: 2px solid transparent; transition: border 0.3s; }
+        .contact-details-box a:hover { border-bottom-color: #7cb9ff; }
 
-        .grid-block:hover {
-            transform: translateZ(20px);
-        }
-
-        .contact-info-column {
-            width: 45%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .contact-info-column h2 {
-            font-size: clamp(3.5rem, 6.5vw, 6.5rem);
-            font-weight: 400;
-            letter-spacing: -2px;
-            margin-bottom: 4rem;
-        }
-
-        .contact-details-box {
-            font-family: var(--font-mono);
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .contact-details-box a {
-            color: #7cb9ff;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-block;
-            margin-top: 2rem;
-            border-bottom: 2px solid transparent;
-            transition: border 0.3s;
-        }
-
-        .contact-details-box a:hover {
-            border-bottom-color: #7cb9ff;
-        }
-
-        /* ANIMATION INTERFACE CLASSES */
+        /* REVEAL ON SCROLL ENGINE */
         .reveal-element {
             opacity: 0;
             transform: translateY(40px);
             transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .reveal-element.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
+        .reveal-element.revealed { opacity: 1; transform: translateY(0); }
         .delay-1 { transition-delay: 0.15s; }
         .delay-2 { transition-delay: 0.3s; }
         .delay-3 { transition-delay: 0.45s; }
@@ -566,12 +625,15 @@
             .testimonial-columns { grid-template-columns: 1fr; gap: 4rem; }
             .floating-layout-shape { display: none; }
             .fixed-nav { right: 1rem; top: 1rem; padding: 0.4rem 1rem; }
+            .pro-player-container { flex-direction: column-reverse; text-align: center; justify-content: center; }
+            .pro-controls-deck { justify-content: center; }
+            .waveform-container { justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Sticky Navigation Controls Overlay -->
+    <!-- Slide Navigation Links -->
     <nav class="fixed-nav">
         <a href="#hero" class="nav-bullet active" data-sec="hero">Slide 01</a>
         <a href="#presence" class="nav-bullet" data-sec="presence">Slide 02</a>
@@ -579,24 +641,72 @@
         <a href="#contact" class="nav-bullet" data-sec="contact">Slide 04</a>
     </nav>
 
-    <!-- Persistent Floating Action Side Trigger Button -->
+    <!-- Side Fixed Trigger Button -->
     <div class="side-music-btn" id="open-player-btn">Listen to New Song</div>
 
-    <!-- Canvas Style Minimalist Player Fullscreen Overlay -->
+    <!-- PRO RECORD PLAYER FULLSCREEN OVERLAY (Inspired by image_555e0d.png) -->
     <div id="music-overlay">
-        <div class="music-card">
-            <img src="https://amrdiab.net/wp-content/uploads/2025/07/NewAlbum2025-AmrDiab.jpg" alt="Amr Diab New Album Artwork">
-            <h2>Akss Bad</h2>
-            <div class="artist-tag">Amr Diab</div>
-            <audio id="audio-player" controls>
-                <source src="AMR DIAB AKSS BAD.m4a" type="audio/mp4">
-                Your browser does not support the audio element.
-            </audio>
-            <div class="close-overlay-btn" id="close-player-btn">✕ Close Player</div>
+        <button class="close-pro-btn" id="close-player-btn">← Back to Site</button>
+        
+        <div class="pro-player-container" id="player-container-context">
+            <!-- Left Side Data Track Deck -->
+            <div class="player-left">
+                <!-- Code Generated Pseudo Waveform Visualizer -->
+                <div class="waveform-container">
+                    <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+                </div>
+
+                <h2 class="pro-track-title">Akss Bad</h2>
+                <div class="pro-track-artist">Amr Diab</div>
+
+                <!-- Interactive Timeline Scrub Track -->
+                <div class="pro-timeline-wrapper">
+                    <div class="timeline-bar-bg" id="timeline-scrub-zone">
+                        <div class="timeline-bar-progress" id="progress-indicator"></div>
+                    </div>
+                    <div class="time-counter" id="track-timer">0:00</div>
+                </div>
+
+                <!-- Custom Deck Controls Layout -->
+                <div class="pro-controls-deck">
+                    <!-- Loop Icon -->
+                    <button class="deck-icon" id="loop-toggle-btn">
+                        <svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                    </button>
+                    <!-- Prev Icon -->
+                    <button class="deck-icon">
+                        <svg viewBox="0 0 24 24"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="4" x2="5" y2="20"/></svg>
+                    </button>
+                    <!-- Core Play Toggle Dynamic Base Button -->
+                    <button class="deck-icon play-pause-btn" id="pro-play-trigger">
+                        <svg id="play-svg-state" viewBox="0 0 24 24" style="margin-left: 2px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    </button>
+                    <!-- Next Icon -->
+                    <button class="deck-icon">
+                        <svg viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="4" x2="19" y2="20"/></svg>
+                    </button>
+                    <!-- Shuffle Icon -->
+                    <button class="deck-icon">
+                        <svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Side Spinning Vinyl Disc Deck -->
+            <div class="player-right">
+                <div class="vinyl-disk" id="vinyl-spin-element">
+                    <div class="vinyl-center-art"></div>
+                </div>
+            </div>
         </div>
+
+        <!-- System Hidden Core Native Audio Player -->
+        <audio id="audio-player">
+            <source src="AMR DIAB AKSS BAD.m4a" type="audio/mp4">
+        </audio>
     </div>
 
-    <!-- Ambient Dynamic Background Shapes -->
+    <!-- Ambient Ambient Dynamic Blur Shapes -->
     <div class="fluid-accent accent-1"></div>
     <div class="fluid-accent accent-2"></div>
 
@@ -611,13 +721,13 @@
             </div>
             <div class="media-column reveal-element delay-1">
                 <div class="laptop-mockup-wrapper">
-                    <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80" alt="Marketing Presentation Dashboard">
+                    <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80" alt="Dashboard Graphic UI">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 2: GROW YOUR PRESENCE -->
+    <!-- SECTION 2: PRESENCE -->
     <section id="presence" class="page-section">
         <div class="abstract-frame-left"></div>
         <div class="floating-layout-shape shape-left-top reveal-element"></div>
@@ -630,7 +740,7 @@
         </div>
     </section>
 
-    <!-- SECTION 3: WHAT CUSTOMERS SAY -->
+    <!-- SECTION 3: TESTIMONIALS -->
     <section id="testimonials" class="page-section">
         <div class="corner-decoration-top"></div>
         <div class="testimonials-container">
@@ -667,20 +777,12 @@
         </div>
     </section>
 
-    <!-- SECTION 4: QUESTIONS? -->
+    <!-- SECTION 4: CONTACT / QUESTIONS -->
     <section id="contact" class="page-section">
         <div class="two-col-container">
             <div class="contact-panel reveal-element">
                 <div class="grid-graphic-3d">
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
+                    <div class="grid-block"></div><div class="grid-block"></div><div class="grid-block"></div><div class="grid-block"></div><div class="grid-block"></div><div class="grid-block"></div><div class="grid-block"></div><div class="grid-block"></div><div class="grid-block"></div>
                 </div>
             </div>
             <div class="contact-info-column reveal-element delay-1">
@@ -694,57 +796,120 @@
         </div>
     </section>
 
-    <!-- INTERSECTION OBSERVER & PLAYER CONTROL SCRIPTS -->
+    <!-- RUNTIME LOGIC INTERFACES -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             
-            // 1. Fluid Entrance Elements Scroll Management
+            // 1. Scroll Intros Management
             const revealElements = document.querySelectorAll(".reveal-element");
             const revealObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if(entry.isIntersecting) {
-                        entry.target.classList.add("revealed");
-                    } else {
-                        entry.target.classList.remove("revealed");
-                    }
+                    if(entry.isIntersecting) entry.target.classList.add("revealed");
+                    else entry.target.classList.remove("revealed");
                 });
-            }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+            }, { threshold: 0.15 });
             revealElements.forEach(el => revealObserver.observe(el));
 
-            // 2. Active Bullet Navigation Track System
+            // 2. Active Anchor Bullet Tracker
             const sections = document.querySelectorAll(".page-section");
             const navBullets = document.querySelectorAll(".nav-bullet");
             const navObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if(entry.isIntersecting) {
                         const currentId = entry.target.getAttribute("id");
-                        navBullets.forEach(bullet => {
-                            if(bullet.getAttribute("data-sec") === currentId) {
-                                bullet.classList.add("active");
-                            } else {
-                                bullet.classList.remove("active");
-                            }
+                        navBullets.forEach(b => {
+                            if(b.getAttribute("data-sec") === currentId) b.classList.add("active");
+                            else b.classList.remove("active");
                         });
                     }
                 });
             }, { threshold: 0.5 });
             sections.forEach(sec => navObserver.observe(sec));
 
-            // 3. Media Presentation Modal State Handlers
-            const openBtn = document.getElementById("open-player-btn");
-            const closeBtn = document.getElementById("close-player-btn");
-            const overlay = document.getElementById("music-overlay");
-            const player = document.getElementById("audio-player");
+            // 3. Pro Media Deck Event Core Sub-Architecture
+            const openPlayerBtn = document.getElementById("open-player-btn");
+            const closePlayerBtn = document.getElementById("close-player-btn");
+            const musicOverlay = document.getElementById("music-overlay");
+            
+            const audio = document.getElementById("audio-player");
+            const playTrigger = document.getElementById("pro-play-trigger");
+            const playIcon = document.getElementById("play-svg-state");
+            const vinyl = document.getElementById("vinyl-spin-element");
+            const contextContainer = document.getElementById("player-container-context");
+            
+            const progressBar = document.getElementById("progress-indicator");
+            const scrubZone = document.getElementById("timeline-scrub-zone");
+            const timerText = document.getElementById("track-timer");
+            const loopBtn = document.getElementById("loop-toggle-btn");
 
-            openBtn.addEventListener("click", () => {
-                overlay.style.display = "flex";
-                setTimeout(() => overlay.classList.add("active"), 10);
+            // SVG Vectors paths mapping states
+            const playSVGPath = "M5 3 19 12 5 21 5 3";
+            const pauseSVGPath = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
+
+            // Open/Close views configurations
+            openPlayerBtn.addEventListener("click", () => {
+                musicOverlay.style.display = "flex";
             });
 
-            closeBtn.addEventListener("click", () => {
-                overlay.classList.remove("active");
-                player.pause(); // Soft pause audio playback on view exit
-                setTimeout(() => overlay.style.display = "none", 400);
+            closePlayerBtn.addEventListener("click", () => {
+                musicOverlay.style.display = "none";
+                audio.pause();
+                setPlaybackState(false);
+            });
+
+            // Master Playback State Coordinator
+            function setPlaybackState(isPlaying) {
+                if(isPlaying) {
+                    playIcon.innerHTML = `<path d="${pauseSVGPath}"></path>`;
+                    vinyl.classList.add("rotating");
+                    contextContainer.classList.add("playing");
+                } else {
+                    playIcon.innerHTML = `<polygon points="${playSVGPath}"></polygon>`;
+                    vinyl.classList.remove("rotating");
+                    contextContainer.classList.remove("playing");
+                }
+            }
+
+            playTrigger.addEventListener("click", () => {
+                if (audio.paused) {
+                    audio.play();
+                    setPlaybackState(true);
+                } else {
+                    audio.pause();
+                    setPlaybackState(false);
+                }
+            });
+
+            // Sync Timeline Interface status
+            audio.addEventListener("timeupdate", () => {
+                const percentage = (audio.currentTime / audio.duration) * 100;
+                progressBar.style.width = percentage + "%";
+                
+                // Formulate tracking clock
+                let mins = Math.floor(audio.currentTime / 60);
+                let secs = Math.floor(audio.currentTime % 60);
+                if(secs < 10) secs = '0' + secs;
+                
+                // Show total duration if track hasn't updated timestamps yet
+                if(isNaN(mins)) {
+                    timerText.innerText = "0:00";
+                } else {
+                    timerText.innerText = mins + ":" + secs;
+                }
+            });
+
+            // Interactive scrub zone event tracking
+            scrubZone.addEventListener("click", (e) => {
+                const totalWidth = scrubZone.clientWidth;
+                const clickedX = e.offsetX;
+                const clickPercentage = clickedX / totalWidth;
+                audio.currentTime = clickPercentage * audio.duration;
+            });
+
+            // Loop track toggle listener option
+            loopBtn.addEventListener("click", () => {
+                audio.loop = !audio.loop;
+                loopBtn.style.stroke = audio.loop ? "#0066ff" : "rgba(255, 255, 255, 0.6)";
             });
         });
     </script>
