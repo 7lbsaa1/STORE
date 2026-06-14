@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Studio + Lab | Digital Solutions</title>
+    
+    <!-- Premium Inter and Space Mono Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Reset & Core Config */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-gradient: linear-gradient(180deg, #6baeff 0%, #1a56b2 45%, #050d1a 100%);
+            --text-main: #ffffff;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.25);
+            --glass-shadow:0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: #050d1a;
+            color: var(--text-main);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Continuous Fluid Background Track mirroring across sections */
+        .page-section {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 5rem 8%;
+            overflow: hidden;
+            background: var(--bg-gradient);
+        }
+
+        /* Specific gradient offsets to make continuous slide feel */
+        #hero { background: linear-gradient(135deg, #7cb9ff 0%, #1852a6 60%, #030811 100%); }
+        #presence { background: linear-gradient(180deg, #030811 0%, #15458c 50%, #030811 100%); }
+        #testimonials { background: linear-gradient(180deg, #030811 0%, #11366f 40%, #02060c 100%); }
+        #contact { background: linear-gradient(225deg, #02060c 0%, #1954ab 70%, #60a1f0 100%); }
+
+        /* Modern Navigation Overlay */
+        .fixed-nav {
+            position: fixed;
+            top: 2rem;
+            right: 3rem;
+            z-index: 100;
+            display: flex;
+            gap: 1.5rem;
+            background: rgba(5, 13, 26, 0.4);
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-bullet {
+            font-size: 0.8rem;
+            font-family: var(--font-mono);
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition: color 0.3s, transform 0.3s;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .nav-bullet:hover, .nav-bullet.active {
+            color: #7cb9ff;
+            transform: scale(1.05);
+        }
+
+        /* Abstract Fluid Graphic Accents */
+        .fluid-accent {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+            filter: blur(10px);
+            animation: pulse-ambient 8s infinite ease-in-out;
+        }
+
+        .accent-1 {
+            top: -10%; right: -5%; width: 40vw; height: 40vw;
+            background: linear-gradient(45deg, rgba(147,197,253,0.4), rgba(59,130,246,0.2));
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+
+        .accent-2 {
+            bottom: -10%; left: -5%; width: 35vw; height: 35vw;
+            background: linear-gradient(135deg, rgba(30,58,138,0.6), rgba(147,197,253,0.3));
+            border-radius: 60% 40% 30% 70% / 50% 30% 70% 50%;
+        }
+
+        /* Custom Asymmetric Glassmorphism Panels */
+        .glass-panel {
+            position: relative;
+            z-index: 5;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px) cubic-bezier(0.25, 1, 0.5, 1);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            padding: 4.5rem;
+            width: 48%;
+            /* Distinct custom cut/rounded asymmetric borders matching slide_1 */
+            border-radius: 60px 60px 4px 60px;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .glass-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 35px 60px -10px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Section layout containers */
+        .two-col-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 4rem;
+            z-index: 2;
+        }
+
+        /* Typography Layout */
+        .studio-tag {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+
+        .huge-heading {
+            font-size: clamp(3rem, 6.5vw, 6.5rem);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -3px;
+            margin-bottom: 2rem;
+        }
+
+        .sub-message {
+            font-size: 1.25rem;
+            font-family: var(--font-mono);
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+            letter-spacing: 1px;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+        }
+
+        /* Pro Interactive Actions */
+        .btn-modern {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.2rem 2.8rem;
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: #0066ff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.4);
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .btn-modern:hover {
+            background: #2680ff;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.6);
+        }
+
+        /* Mock/Media Content Columns */
+        .media-column {
+            width: 48%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+        }
+
+        .laptop-mockup-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.6);
+            border: 4px solid #1a1a1a;
+            background: #000;
+        }
+
+        .laptop-mockup-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ==========================================================================
+           PAGE 2: GROW YOUR PRESENCE LAYOUT
+           ========================================================================== */
+        .presence-grid {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .presence-text-block {
+            max-width: 800px;
+            z-index: 10;
+            margin-bottom: 4rem;
+        }
+
+        .presence-text-block h2 {
+            font-size: clamp(3rem, 6vw, 5.8rem);
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .presence-text-block p {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+        }
+
+        /* Absolute Floating Shape Layout matching Slide 2 exactly */
+        .floating-layout-shape {
+            position: absolute;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .shape-left-top {
+            top: -10%;
+            left: 2%;
+            width: 280px;
+            height: 280px;
+            border-radius: 40px;
+            background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=500&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .shape-right-bottom {
+            bottom: -15%;
+            right: 4%;
+            width: 320px;
+            height: 380px;
+            border-radius: 60px 60px 4px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Abstract structural frame block overlaying left side */
+        .abstract-frame-left {
+            position: absolute;
+            bottom: -20%;
+            left: -5%;
+            width: 300px;
+            height: 300px;
+            border-left: 1px solid rgba(255,255,255,0.2);
+            border-top: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px 0 0 0;
+        }
+
+        /* ==========================================================================
+           PAGE 3: TESTIMONIALS LAYOUT
+           ========================================================================== */
+        .testimonials-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 4.5rem;
+            z-index: 5;
+        }
+
+        .testimonials-container h2 {
+            font-size: clamp(3rem, 5.5vw, 5.5rem);
+            font-weight: 300;
+            letter-spacing: -2px;
+        }
+
+        .testimonial-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3.5rem;
+        }
+
+        .testimonial-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 2.5rem;
+        }
+
+        .quote-body {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            line-height: 1.65;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: justify;
+        }
+
+        .quote-author {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.4;
+        }
+
+        .quote-author span {
+            display: block;
+            font-family: var(--font-mono);
+            font-weight: 400;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 0.25rem;
+        }
+
+        /* Decorative line corners for page 3 details */
+        .corner-decoration-top {
+            position: absolute;
+            top: 4%;
+            right: 6%;
+            width: 180px;
+            height: 120px;
+            border-top: 1px solid rgba(255,255,255,0.25);
+            border-right: 1px solid rgba(255,255,255,0.25);
+            border-radius: 0 40px 0 0;
+        }
+
+        /* ==========================================================================
+           PAGE 4: QUESTIONS / CONTACT LAYOUT
+           ========================================================================== */
+        .contact-panel {
+            width: 48%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 60px 4px 60px 60px; /* Counter-balanced asymmetry */
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--glass-shadow);
+        }
+
+        /* 3D Grid Object graphic using geometric pure CSS layout */
+        .grid-graphic-3d {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            width: 50%;
+            height: 50%;
+            transform: perspective(600px) rotateX(10deg) rotateY(-10deg);
+        }
+
+        .grid-block {
+            background: linear-gradient(135deg, #a1caff 0%, #3b82f6 100%);
+            border-radius: 14px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+
+        .grid-block:nth-child(even) {
+            background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+        }
+
+        .grid-block:hover {
+            transform: translateZ(20px);
+        }
+
+        .contact-info-column {
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-info-column h2 {
+            font-size: clamp(3.5rem, 6.5vw, 6.5rem);
+            font-weight: 400;
+            letter-spacing: -2px;
+            margin-bottom: 4rem;
+        }
+
+        .contact-details-box {
+            font-family: var(--font-mono);
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-details-box a {
+            color: #7cb9ff;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 2rem;
+            border-bottom: 2px solid transparent;
+            transition: border 0.3s;
+        }
+
+        .contact-details-box a:hover {
+            border-bottom-color: #7cb9ff;
+        }
+
+        /* ==========================================================================
+           ADVANCED JAVASCRIPT ANIMATION INTERACTION INTERFACE CLASSES
+           ========================================================================== */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .reveal-element.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered delay helpers */
+        .delay-1 { transition-delay: 0.15s; }
+        .delay-2 { transition-delay: 0.3s; }
+        .delay-3 { transition-delay: 0.45s; }
+
+        @keyframes pulse-ambient {
+            0%, 100% { transform: scale(1) translate(0, 0); }
+            50% { transform: scale(1.08) translate(3%, 2%); }
+        }
+
+        /* ==========================================================================
+           RESPONSIVE RE-CONSTRAINTS
+           ========================================================================== */
+        @media (max-width: 1024px) {
+            .two-col-container { flex-direction: column; gap: 4rem; }
+            .glass-panel, .media-column, .contact-panel, .contact-info-column { width: 100%; }
+            .testimonial-columns { grid-template-columns: 1fr; gap: 4rem; }
+            .floating-layout-shape { display: none; } /* Simplify on complex viewport overrides */
+            .fixed-nav { right: 1rem; top: 1rem; padding: 0.4rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Navigation Controls Overlay -->
+    <nav class="fixed-nav">
+        <a href="#hero" class="nav-bullet active" data-sec="hero">Slide 01</a>
+        <a href="#presence" class="nav-bullet" data-sec="presence">Slide 02</a>
+        <a href="#testimonials" class="nav-bullet" data-sec="testimonials">Slide 03</a>
+        <a href="#contact" class="nav-bullet" data-sec="contact">Slide 04</a>
+    </nav>
+
+    <!-- Ambient Dynamic Background Shapes -->
+    <div class="fluid-accent accent-1"></div>
+    <div class="fluid-accent accent-2"></div>
+
+
+    <!-- ==========================================================================
+       SECTION 1: HERO (Let's Get Digital)
+       ========================================================================== -->
+    <section id="hero" class="page-section">
+        <div class="two-col-container">
+            
+            <div class="glass-panel reveal-element">
+                <span class="studio-tag">Creative Studio + Lab</span>
+                <h1 class="huge-heading">Let's get<br>digital</h1>
+                <p class="sub-message">Our new digital marketing<br>packages are here</p>
+                <a href="#presence" class="btn-modern">Learn More</a>
+            </div>
+
+            <div class="media-column reveal-element delay-1">
+                <div class="laptop-mockup-wrapper">
+                    <!-- Clean production representation layout of tablet interface -->
+                    <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80" alt="Marketing Presentation Dashboard">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ==========================================================================
+       SECTION 2: GROW YOUR PRESENCE
+       ========================================================================== -->
+    <section id="presence" class="page-section">
+        <div class="abstract-frame-left"></div>
+        
+        <!-- Exact reproduction positioning from slide image 2 template grid -->
+        <div class="floating-layout-shape shape-left-top reveal-element"></div>
+        <div class="floating-layout-shape shape-right-bottom reveal-element delay-2"></div>
+
+        <div class="presence-grid">
+            <div class="presence-text-block reveal-element delay-1">
+                <h2>Grow your presence.</h2>
+                <p>We'll help put your company on the digital map, through websites and social platforms.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==========================================================================
+       SECTION 3: WHAT CUSTOMERS SAY
+       ========================================================================== -->
+    <section id="testimonials" class="page-section">
+        <div class="corner-decoration-top"></div>
+
+        <div class="testimonials-container">
+            <h2 class="reveal-element">What Customers Say</h2>
+            
+            <div class="testimonial-columns">
+                
+                <!-- Column 1 -->
+                <div class="testimonial-card reveal-element delay-1">
+                    <p class="quote-body">
+                        "Their creativity, attention to detail, and ability to bring our vision to life made us feel like we finally had a partner who got it."
+                    </p>
+                    <div class="quote-author">
+                        Leslie Boatwright, CEO
+                        <span>Hillstreet Industries</span>
+                    </div>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="testimonial-card reveal-element delay-2">
+                    <p class="quote-body">
+                        "The team at Creative Studio + Lab took our scattered ideas and turned them into a polished, cohesive brand identity."
+                    </p>
+                    <div class="quote-author">
+                        Carly Ferris, Founder
+                        <span>Vivarily</span>
+                    </div>
+                </div>
+
+                <!-- Column 3 -->
+                <div class="testimonial-card reveal-element delay-3">
+                    <p class="quote-body">
+                        "I've worked with other agencies before, but Creative Studio + Lab delivered fresh, creative concepts that blew us away."
+                    </p>
+                    <div class="quote-author">
+                        Gabriel Shelby, Owner
+                        <span>Stipple Unlimited</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==========================================================================
+       SECTION 4: QUESTIONS?
+       ========================================================================== -->
+    <section id="contact" class="page-section">
+        <div class="two-col-container">
+            
+            <!-- Structural 3D Matrix block layout representing slide 4 artwork -->
+            <div class="contact-panel reveal-element">
+                <div class="grid-graphic-3d">
+                    <div class="grid-block"></div>
+                    <div class="grid-block"></div>
+                    <div class="grid-block"></div>
+                    <div class="grid-block"></div>
+                    <div class="grid-block"></div>
+                    <div class="grid-block"></div>
+                    <div class="grid-block"></div>
+                    <div class="grid-block"></div>
+                    <div class="grid-block"></div>
+                </div>
+            </div>
+
+            <div class="contact-info-column reveal-element delay-1">
+                <h2>Questions?</h2>
+                <div class="contact-details-box">
+                    <p>123 Anywhere St., Any City, ST 12345</p>
+                    <p>123-456-7890</p>
+                    <a href="mailto:hello@reallygreatsite.com">hello@reallygreatsite.com</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ==========================================================================
+       RECENT JAVA ANIMATION CSS INTERACTION SCRIPTS (Intersection Observer APIs)
+       ========================================================================== -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // 1. Smooth entrance visibility scroll animations
+            const revealElements = document.querySelectorAll(".reveal-element");
+            
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add("revealed");
+                        // Optional: unobserve if you only want animation to happen once
+                        // observer.unobserve(entry.target);
+                    } else {
+                        // Keeps interactive exit/re-entrance active on scroll track
+                        entry.target.classList.remove("revealed");
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+
+            // 2. Active Slide Navigation Bullets Tracking System
+            const sections = document.querySelectorAll(".page-section");
+            const navBullets = document.querySelectorAll(".nav-bullet");
+
+            const navObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        const currentId = entry.target.getAttribute("id");
+                        navBullets.forEach(bullet => {
+                            if(bullet.getAttribute("data-sec") === currentId) {
+                                bullet.classList.add("active");
+                            } else {
+                                bullet.classList.remove("active");
+                            }
+                        });
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            sections.forEach(sec => navObserver.observe(sec));
+        });
+    </script>
+
+</body>
+</html>
