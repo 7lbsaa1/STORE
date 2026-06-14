@@ -25,7 +25,7 @@
             --font-mono: 'Space Mono', monospace;
             --glass-bg: rgba(255, 255, 255, 0.08);
             --glass-border: rgba(255, 255, 255, 0.25);
-            --glass-shadow:0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            --glass-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
         body {
@@ -84,6 +84,116 @@
             transform: scale(1.05);
         }
 
+        /* Persistent Side Music Button */
+        .side-music-btn {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background: #0066ff;
+            color: white;
+            padding: 1.5rem 0.6rem;
+            border-radius: 0 12px 12px 0;
+            cursor: pointer;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 5px 0 25px rgba(0, 102, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .side-music-btn:hover {
+            background: #2680ff;
+            padding-left: 0.9rem;
+        }
+
+        /* High-Fidelity Music Overlay Page (Canva inspired) */
+        #music-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 13, 26, 0.95);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .music-card {
+            width: 90%;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 2.5rem;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        #music-overlay.active .music-card {
+            transform: scale(1);
+        }
+
+        .music-card img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        .music-card h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .music-card .artist-tag {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: #7cb9ff;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 1rem;
+            border-radius: 30px;
+        }
+
+        .close-overlay-btn {
+            margin-top: 2rem;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+        }
+
+        .close-overlay-btn:hover {
+            color: #ffffff;
+        }
+
         /* Abstract Fluid Graphic Accents */
         .fluid-accent {
             position: absolute;
@@ -116,7 +226,6 @@
             box-shadow: var(--glass-shadow);
             padding: 4.5rem;
             width: 48%;
-            /* Distinct custom cut/rounded asymmetric borders matching slide_1 */
             border-radius: 60px 60px 4px 60px;
             transition: transform 0.5s ease, box-shadow 0.5s ease;
         }
@@ -217,9 +326,7 @@
             display: block;
         }
 
-        /* ==========================================================================
-           PAGE 2: GROW YOUR PRESENCE LAYOUT
-           ========================================================================== */
+        /* PAGE 2: GROW YOUR PRESENCE LAYOUT */
         .presence-grid {
             position: relative;
             width: 100%;
@@ -250,7 +357,6 @@
             line-height: 1.7;
         }
 
-        /* Absolute Floating Shape Layout matching Slide 2 exactly */
         .floating-layout-shape {
             position: absolute;
             background: var(--glass-bg);
@@ -285,7 +391,6 @@
             background-position: center;
         }
 
-        /* Abstract structural frame block overlaying left side */
         .abstract-frame-left {
             position: absolute;
             bottom: -20%;
@@ -297,9 +402,7 @@
             border-radius: 50px 0 0 0;
         }
 
-        /* ==========================================================================
-           PAGE 3: TESTIMONIALS LAYOUT
-           ========================================================================== */
+        /* PAGE 3: TESTIMONIALS LAYOUT */
         .testimonials-container {
             width: 100%;
             display: flex;
@@ -352,7 +455,6 @@
             margin-top: 0.25rem;
         }
 
-        /* Decorative line corners for page 3 details */
         .corner-decoration-top {
             position: absolute;
             top: 4%;
@@ -364,15 +466,13 @@
             border-radius: 0 40px 0 0;
         }
 
-        /* ==========================================================================
-           PAGE 4: QUESTIONS / CONTACT LAYOUT
-           ========================================================================== */
+        /* PAGE 4: QUESTIONS / CONTACT LAYOUT */
         .contact-panel {
             width: 48%;
             background: var(--glass-bg);
             backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
-            border-radius: 60px 4px 60px 60px; /* Counter-balanced asymmetry */
+            border-radius: 60px 4px 60px 60px;
             aspect-ratio: 1 / 1;
             display: flex;
             align-items: center;
@@ -380,7 +480,6 @@
             box-shadow: var(--glass-shadow);
         }
 
-        /* 3D Grid Object graphic using geometric pure CSS layout */
         .grid-graphic-3d {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -440,9 +539,7 @@
             border-bottom-color: #7cb9ff;
         }
 
-        /* ==========================================================================
-           ADVANCED JAVASCRIPT ANIMATION INTERACTION INTERFACE CLASSES
-           ========================================================================== */
+        /* ANIMATION INTERFACE CLASSES */
         .reveal-element {
             opacity: 0;
             transform: translateY(40px);
@@ -454,7 +551,6 @@
             transform: translateY(0);
         }
 
-        /* Staggered delay helpers */
         .delay-1 { transition-delay: 0.15s; }
         .delay-2 { transition-delay: 0.3s; }
         .delay-3 { transition-delay: 0.45s; }
@@ -464,14 +560,11 @@
             50% { transform: scale(1.08) translate(3%, 2%); }
         }
 
-        /* ==========================================================================
-           RESPONSIVE RE-CONSTRAINTS
-           ========================================================================== */
         @media (max-width: 1024px) {
             .two-col-container { flex-direction: column; gap: 4rem; }
             .glass-panel, .media-column, .contact-panel, .contact-info-column { width: 100%; }
             .testimonial-columns { grid-template-columns: 1fr; gap: 4rem; }
-            .floating-layout-shape { display: none; } /* Simplify on complex viewport overrides */
+            .floating-layout-shape { display: none; }
             .fixed-nav { right: 1rem; top: 1rem; padding: 0.4rem 1rem; }
         }
     </style>
@@ -486,45 +579,49 @@
         <a href="#contact" class="nav-bullet" data-sec="contact">Slide 04</a>
     </nav>
 
+    <!-- Persistent Floating Action Side Trigger Button -->
+    <div class="side-music-btn" id="open-player-btn">Listen to New Song</div>
+
+    <!-- Canvas Style Minimalist Player Fullscreen Overlay -->
+    <div id="music-overlay">
+        <div class="music-card">
+            <img src="https://amrdiab.net/wp-content/uploads/2025/07/NewAlbum2025-AmrDiab.jpg" alt="Amr Diab New Album Artwork">
+            <h2>Akss Bad</h2>
+            <div class="artist-tag">Amr Diab</div>
+            <audio id="audio-player" controls>
+                <source src="AMR DIAB AKSS BAD.m4a" type="audio/mp4">
+                Your browser does not support the audio element.
+            </audio>
+            <div class="close-overlay-btn" id="close-player-btn">✕ Close Player</div>
+        </div>
+    </div>
+
     <!-- Ambient Dynamic Background Shapes -->
     <div class="fluid-accent accent-1"></div>
     <div class="fluid-accent accent-2"></div>
 
-
-    <!-- ==========================================================================
-       SECTION 1: HERO (Let's Get Digital)
-       ========================================================================== -->
+    <!-- SECTION 1: HERO -->
     <section id="hero" class="page-section">
         <div class="two-col-container">
-            
             <div class="glass-panel reveal-element">
                 <span class="studio-tag">Creative Studio + Lab</span>
                 <h1 class="huge-heading">Let's get<br>digital</h1>
                 <p class="sub-message">Our new digital marketing<br>packages are here</p>
                 <a href="#presence" class="btn-modern">Learn More</a>
             </div>
-
             <div class="media-column reveal-element delay-1">
                 <div class="laptop-mockup-wrapper">
-                    <!-- Clean production representation layout of tablet interface -->
                     <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80" alt="Marketing Presentation Dashboard">
                 </div>
             </div>
-
         </div>
     </section>
 
-
-    <!-- ==========================================================================
-       SECTION 2: GROW YOUR PRESENCE
-       ========================================================================== -->
+    <!-- SECTION 2: GROW YOUR PRESENCE -->
     <section id="presence" class="page-section">
         <div class="abstract-frame-left"></div>
-        
-        <!-- Exact reproduction positioning from slide image 2 template grid -->
         <div class="floating-layout-shape shape-left-top reveal-element"></div>
         <div class="floating-layout-shape shape-right-bottom reveal-element delay-2"></div>
-
         <div class="presence-grid">
             <div class="presence-text-block reveal-element delay-1">
                 <h2>Grow your presence.</h2>
@@ -533,19 +630,12 @@
         </div>
     </section>
 
-
-    <!-- ==========================================================================
-       SECTION 3: WHAT CUSTOMERS SAY
-       ========================================================================== -->
+    <!-- SECTION 3: WHAT CUSTOMERS SAY -->
     <section id="testimonials" class="page-section">
         <div class="corner-decoration-top"></div>
-
         <div class="testimonials-container">
             <h2 class="reveal-element">What Customers Say</h2>
-            
             <div class="testimonial-columns">
-                
-                <!-- Column 1 -->
                 <div class="testimonial-card reveal-element delay-1">
                     <p class="quote-body">
                         "Their creativity, attention to detail, and ability to bring our vision to life made us feel like we finally had a partner who got it."
@@ -555,8 +645,6 @@
                         <span>Hillstreet Industries</span>
                     </div>
                 </div>
-
-                <!-- Column 2 -->
                 <div class="testimonial-card reveal-element delay-2">
                     <p class="quote-body">
                         "The team at Creative Studio + Lab took our scattered ideas and turned them into a polished, cohesive brand identity."
@@ -566,8 +654,6 @@
                         <span>Vivarily</span>
                     </div>
                 </div>
-
-                <!-- Column 3 -->
                 <div class="testimonial-card reveal-element delay-3">
                     <p class="quote-body">
                         "I've worked with other agencies before, but Creative Studio + Lab delivered fresh, creative concepts that blew us away."
@@ -577,19 +663,13 @@
                         <span>Stipple Unlimited</span>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-
-    <!-- ==========================================================================
-       SECTION 4: QUESTIONS?
-       ========================================================================== -->
+    <!-- SECTION 4: QUESTIONS? -->
     <section id="contact" class="page-section">
         <div class="two-col-container">
-            
-            <!-- Structural 3D Matrix block layout representing slide 4 artwork -->
             <div class="contact-panel reveal-element">
                 <div class="grid-graphic-3d">
                     <div class="grid-block"></div>
@@ -603,7 +683,6 @@
                     <div class="grid-block"></div>
                 </div>
             </div>
-
             <div class="contact-info-column reveal-element delay-1">
                 <h2>Questions?</h2>
                 <div class="contact-details-box">
@@ -612,43 +691,29 @@
                     <a href="mailto:hello@reallygreatsite.com">hello@reallygreatsite.com</a>
                 </div>
             </div>
-
         </div>
     </section>
 
-
-    <!-- ==========================================================================
-       RECENT JAVA ANIMATION CSS INTERACTION SCRIPTS (Intersection Observer APIs)
-       ========================================================================== -->
+    <!-- INTERSECTION OBSERVER & PLAYER CONTROL SCRIPTS -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             
-            // 1. Smooth entrance visibility scroll animations
+            // 1. Fluid Entrance Elements Scroll Management
             const revealElements = document.querySelectorAll(".reveal-element");
-            
-            const revealObserver = new IntersectionObserver((entries, observer) => {
+            const revealObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if(entry.isIntersecting) {
                         entry.target.classList.add("revealed");
-                        // Optional: unobserve if you only want animation to happen once
-                        // observer.unobserve(entry.target);
                     } else {
-                        // Keeps interactive exit/re-entrance active on scroll track
                         entry.target.classList.remove("revealed");
                     }
                 });
-            }, {
-                threshold: 0.15,
-                rootMargin: "0px 0px -50px 0px"
-            });
-
+            }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
             revealElements.forEach(el => revealObserver.observe(el));
 
-
-            // 2. Active Slide Navigation Bullets Tracking System
+            // 2. Active Bullet Navigation Track System
             const sections = document.querySelectorAll(".page-section");
             const navBullets = document.querySelectorAll(".nav-bullet");
-
             const navObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if(entry.isIntersecting) {
@@ -662,13 +727,26 @@
                         });
                     }
                 });
-            }, {
-                threshold: 0.5
+            }, { threshold: 0.5 });
+            sections.forEach(sec => navObserver.observe(sec));
+
+            // 3. Media Presentation Modal State Handlers
+            const openBtn = document.getElementById("open-player-btn");
+            const closeBtn = document.getElementById("close-player-btn");
+            const overlay = document.getElementById("music-overlay");
+            const player = document.getElementById("audio-player");
+
+            openBtn.addEventListener("click", () => {
+                overlay.style.display = "flex";
+                setTimeout(() => overlay.classList.add("active"), 10);
             });
 
-            sections.forEach(sec => navObserver.observe(sec));
+            closeBtn.addEventListener("click", () => {
+                overlay.classList.remove("active");
+                player.pause(); // Soft pause audio playback on view exit
+                setTimeout(() => overlay.style.display = "none", 400);
+            });
         });
     </script>
-
 </body>
 </html>
